@@ -24,8 +24,16 @@ $ ./news.sh
 
 你可以通过重定向或者管道来利用这个输出，比如，把它作为邮件发送：
 ```bash
-# 需要加入 Content-Type 行，否则 html 代码会被视为纯文本
-$ ./news.sh | mail -s "$(echo -e "GDUT NEWS\nContent-Type: text/html")" someone@example.com
+#!/bin/sh
+
+(
+    echo "To: driver1998@foxmail.com"
+    echo "From: driver1998@foxmail.com"
+    echo "Subject: GDUT-News"
+    echo "Content-Type: text/html"
+    echo
+    ./news.sh
+) | ssmtp driver1998@foxmail.com
 ```
 
 # 备注
